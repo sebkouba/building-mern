@@ -1,4 +1,4 @@
-# Building Mern
+# Building MERN
 I will go through the steps of building a simple Express server that can be used
 to build React applications with MongoDB. Ech branch should represent one step
 in the process.
@@ -26,3 +26,16 @@ Running `nodemon` directly has the same effect.
 Specifies files to watch and command to run.
 ##### .editorconfig
 File I stole that helps with code style
+
+### 03 Webpack & Babel
+Webpack and Babel are needed to transpile JSX and ES6 to JavaScript most browsers support.
+`npm i -D babel-core babel-loader babel-preset-react html-webpack-plugin webpack webpack-dev-server react-hot-loader babel-preset-es2015`
+| Package             | Description |
+| ---                 | --- |
+| webpack             | Module Bundler turning "code puzzle pieces" an actual application
+| webpack-dev-server  | webpack server on top of express
+| babel-core          | Transpiles code |
+| babel-loader        | Allows specific loaders to be included |
+| babel-preset-react  | Provides react loader |
+
+`npm i -S react react-dom`

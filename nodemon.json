@@ -1,7 +1,9 @@
 {
   "verbose": true,
   "watch": [
-    "server.js"
+    "server.js",
+    "webpack.config.js",
+    "package.json"
   ],
   "exec": "node server.js"
 }

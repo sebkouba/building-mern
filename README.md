@@ -42,17 +42,17 @@ localhost:3001
 ##### Install React
 `npm i -S react react-dom`
 
-| Package             | Description |
-| ---                 | --- |
-| webpack             | Module Bundler turning "code puzzle pieces" an actual application |
-| webpack-dev-server  | webpack server on top of express |
-| webpack-dev-middleware | Serves files from memory over connect server |
-| html-webpack-plugin | Copies index.html file to dist directory |
-| babel-core          | Transpiles code |
-| babel-loader        | Allows specific loaders to be included |
-| babel-preset-react  | Provides react loader |
-| babel-preset-es2015 | ES6 / ES 2015 loader |
-| babel-preset-react-hmre | Preset for react-transform-hmr |
+| Package                 | Description |
+| ---                     | ---         |
+| webpack                 | Module Bundler turning "code puzzle pieces" an actual application |
+| webpack-dev-server      | webpack server on top of express |
+| webpack-dev-middleware  | Serves files from memory over connect server |
+| html-webpack-plugin     | Copies index.html file to dist directory |
+| babel-core              | Transpiles code |
+| babel-loader            | Allows specific loaders to be included |
+| babel-preset-react      | Provides react loader |
+| babel-preset-es2015     | ES6 / ES 2015 loader |
+| babel-preset-react-hmre | Preset for react hot reloading |
 
 
 ## Resources

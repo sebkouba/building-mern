@@ -28,14 +28,32 @@ Specifies files to watch and command to run.
 File I stole that helps with code style
 
 ### 03 Webpack & Babel
-Webpack and Babel are needed to transpile JSX and ES6 to JavaScript most browsers support.
-`npm i -D babel-core babel-loader babel-preset-react html-webpack-plugin webpack webpack-dev-server react-hot-loader babel-preset-es2015`
+This is where it gets complicated, especially because of hot reloading.
+Webpack bundles all the JS files and Babel transpiles JSX and ES6 to ES5.
+
+A WebpackDevServer is introduced to handle the hot reloading, which is running on port 3001.
+This server only handles the "hotness" and sends all requests on to the original
+Express server (somebody please correct me on this). Hot reloading now works on
+localhost:3001
+
+##### Dev dependencies
+`npm i -D babel-core babel-loader babel-preset-react babel-preset-react-hmre babel-preset-es2015 html-webpack-plugin webpack webpack-dev-server webpack-dev-middleware`
+
+##### Install React
+`npm i -S react react-dom`
+
 | Package             | Description |
 | ---                 | --- |
-| webpack             | Module Bundler turning "code puzzle pieces" an actual application
-| webpack-dev-server  | webpack server on top of express
+| webpack             | Module Bundler turning "code puzzle pieces" an actual application |
+| webpack-dev-server  | webpack server on top of express |
+| webpack-dev-middleware | Serves files from memory over connect server |
+| html-webpack-plugin | Copies index.html file to dist directory |
 | babel-core          | Transpiles code |
 | babel-loader        | Allows specific loaders to be included |
 | babel-preset-react  | Provides react loader |
+| babel-preset-es2015 | ES6 / ES 2015 loader |
+| babel-preset-react-hmre | Preset for react-transform-hmr |
 
-`npm i -S react react-dom`
+
+## Resources
+[Hot Reload on top of Express](http://ctheu.com/2015/05/14/using-react-hot-loader-with-a-webpack-dev-server-and-a-node-server/)

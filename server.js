@@ -2,9 +2,9 @@ var express = require('express');
 var app = express();
 
 // when a get request ist sent to '/' return "Hello World"
-//app.get('/hello', (req, res) => {
-//  res.send("Hello Express World");
-//});
+app.get('/hello', (req, res) => {
+  res.send("Hello Express World");
+});
 
 // start the server on port 3000
 var server = app.listen(3000, () => {

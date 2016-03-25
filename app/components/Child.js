@@ -3,7 +3,10 @@ import React from 'react';
 class Child extends React.Component {
   render() {
     return (
-      <h1>Child</h1>
+      <div>
+        <h1>Child Yeah!</h1>
+        <input></input>
+      </div>
     )
   }
 }

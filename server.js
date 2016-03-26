@@ -1,9 +1,21 @@
 var express = require('express');
 var app = express();
+var entryCtrl = require('./controllers/entry.server.controller.js');
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGOLAB_URI);
 
 // when a get request ist sent to '/' return "Hello World"
 app.get('/hello', (req, res) => {
   res.send("Hello Express World");
+});
+
+// send request data to the entryController which saves it in the db
+app.post('/entry', (req, res) => {
+  return entryCtrl.create(req, res);
 });
 
 // start the server on port 3000

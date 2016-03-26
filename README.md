@@ -54,6 +54,27 @@ localhost:3001
 | babel-preset-es2015     | ES6 / ES 2015 loader |
 | babel-preset-react-hmre | Preset for react hot reloading |
 
+### 4 Mongodb & Mongoose
+* mongodb is specified in server.js
+* mongoose model created in `model/entry.server.model.js`
+* controller created in `controller/entry.server.controller.js`
+* route in `server.js` is used to store data from a post request usind the controller
+
+`model/entry.server.model.js` starts with a mongoose schema which is turned into a model
+named 'Entry' and exported.
+
+`controller/entry.server.controller.js` creates an instance of the 'Entry' model. Fields
+are populated from `req.body` and the instance saved to the db. This function is exported and
+used in a route in `server.js` where it is used to store the data in the database (which was specified
+in `server.js`).
+
+##### Install mongoose and body-parser
+Mongoose is a kind of ORM for mongodb. body-parser provides http post data so we have access
+to `req.body.title` for example.
+
+`npm i -S mongoose body-parser`
+
+
 
 ## Resources
 [Hot Reload on top of Express](http://ctheu.com/2015/05/14/using-react-hot-loader-with-a-webpack-dev-server-and-a-node-server/)

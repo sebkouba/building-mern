@@ -55,6 +55,14 @@ localhost:3001
 | babel-preset-react-hmre | Preset for react hot reloading |
 
 ### 4 Mongodb & Mongoose
+
+##### Install mongoose and body-parser
+Mongoose is a kind of ORM for mongodb. body-parser provides http post data so we have access
+to `req.body.title` for example.
+
+`npm i -S mongoose body-parser`
+
+##### Storing Data
 * mongodb is specified in server.js
 * mongoose model created in `model/entry.server.model.js`
 * controller created in `controller/entry.server.controller.js`
@@ -67,13 +75,6 @@ named 'Entry' and exported.
 are populated from `req.body` and the instance saved to the db. This function is exported and
 used in a route in `server.js` where it is used to store the data in the database (which was specified
 in `server.js`).
-
-##### Install mongoose and body-parser
-Mongoose is a kind of ORM for mongodb. body-parser provides http post data so we have access
-to `req.body.title` for example.
-
-`npm i -S mongoose body-parser`
-
 
 
 ## Resources

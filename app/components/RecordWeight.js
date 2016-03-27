@@ -1,9 +1,42 @@
 import React from 'react';
 
 class RecordWeight extends React.Component {
-  render() {
+  handleSubmit(){
+    var newWeight = this.weight.value;
+    this.weight.value = '';
+    this.saveWeight(newWeight);
+  }
+  setRef(ref){
+    this.weight = ref;
+  }
+
+  saveWeight(val){
+    console.log("saving weight: " + val);
+    // post something to /entry
+  $.ajax({
+      url: '/entry',
+      type: 'POST',
+      data: {title: "from ajax: " + val},
+      success: function(data) {
+        console.log("success");
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  }
+
+  render(){
     return (
-      <h1>Record Weight</h1>
+      <div className="input-group">
+        <input type="text" className="form-control" placeholder="Enter weight"
+               ref={(ref) => this.setRef(ref)}/>
+        <span className='input-group-btn'>
+          <button className="btn btn-default" type="button"
+                  onClick={() => this.handleSubmit()}>Submit
+          </button>
+        </span>
+      </div>
     )
   }
 }

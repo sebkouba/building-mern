@@ -18,6 +18,13 @@ app.post('/entry', (req, res) => {
   return entryCtrl.create(req, res);
 });
 
+// forward requests to the hot server. Seems to fix my F5 bug...
+var request = require('request');
+app.use('/*', function(req, res) {
+  var url = "http://localhost:3001" + req.url;
+  req.pipe(request(url)).pipe(res);
+});
+
 // start the server on port 3000
 var server = app.listen(3000, () => {
   console.log("Listening on Port " + server.address().port);

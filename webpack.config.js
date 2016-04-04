@@ -17,7 +17,7 @@ module.exports = {
   entry: [
    'webpack-dev-server/client?http://0.0.0.0:3001',
    'webpack/hot/only-dev-server',
-   './app/index.js'
+   './app/index.js',
   ],
   output: {
     path: __dirname + '/dist',
@@ -30,14 +30,18 @@ module.exports = {
         exclude: /node_modules/,
         loader: "babel-loader",
         query: {
-          "presets": ["es2015", "react", "react-hmre"]
+          "presets": ["es2015", "react", "react-hmre", "stage-2", "stage-0"]
         }
       }
     ]
+  },
+  devServer: {
+    historyApiFallback: true
   },
   plugins: [
     HTMLWebpackPluginConfig,
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]
+
 };

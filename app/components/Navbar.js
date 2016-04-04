@@ -17,10 +17,11 @@ class Navbar extends React.Component {
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              <li><Link to="/recordpb">Record PB</Link></li>
-              <li><Link to="/recordweight">Weight</Link></li>
-              <li><Link to="/recordmeasurements">Measurements</Link></li>
-              <li><Link to="/savepics">Pics</Link></li>
+              <li><Link to="/useradd">Add User</Link></li>
+              <li><Link to="/userdelete">Delete User</Link></li>
+              <li><Link to="/groupadd">Add Group</Link></li>
+              <li><Link to="/groupdelete">Delete Group</Link></li>
+              <li><Link to="/usergroup">Assign User to Group</Link></li>
             </ul>
           </div>
         </div>

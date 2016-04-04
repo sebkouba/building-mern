@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var entryCtrl = require('./controllers/entry.server.controller.js');
+var path = require('path');
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,13 +19,6 @@ app.post('/entry', (req, res) => {
   return entryCtrl.create(req, res);
 });
 
-// forward requests to the hot server. Seems to fix my F5 bug...
-var request = require('request');
-app.use('/*', function(req, res) {
-  var url = "http://localhost:3001" + req.url;
-  req.pipe(request(url)).pipe(res);
-});
-
 // start the server on port 3000
 var server = app.listen(3000, () => {
   console.log("Listening on Port " + server.address().port);
@@ -35,13 +29,15 @@ var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config.js');
 
-new WebpackDevServer(webpack(config), {
+var devServer = new WebpackDevServer(webpack(config), {
   hot: true,
-  historyApiFallback: true,
-  proxy: {
-    "*": "http://localhost:3000"
-  }
-}).listen(3001, 'localhost', function (err, result) {
+  historyApiFallback: true
+  //proxy: {
+  //  "*": "http://localhost:3000"
+  //}
+});
+
+devServer.listen(3001, 'localhost', function (err, result) {
    if (err) {
      console.log(err);
    }

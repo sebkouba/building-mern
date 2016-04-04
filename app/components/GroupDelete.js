@@ -27,7 +27,7 @@ class GroupDelete extends React.Component {
     $.ajax({
         type: "DELETE",
         url: "",
-        data: group.id
+        data: {groupid: group.id}
       });
     this.setState(newState);
   };

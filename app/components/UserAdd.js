@@ -16,7 +16,6 @@ class UserAdd extends React.Component {
       value: event.target.value,
       userInvalid : this.validateUser(event.target.value)
     });
-    console.log("valid in state: " + this.state.userInvalid);
   }
 
   handleSubmit() {
@@ -29,21 +28,21 @@ class UserAdd extends React.Component {
 
   saveUser(username) {
     console.log("saving user: " + username);
-    //const newState = {...this.state, saved: true};
-    //this.setState(newState);
-    // todo create AJAX Request
+    $.ajax({
+      type: "POST",
+      url: "",
+      data: {username: username}
+    });
   }
 
   validateUser(username) {
     // three letters, numbers, underscore
     var re = /^\w{3,10}$/;
     var invalid = !re.test(username);
-    console.log("invalid user: " + invalid);
     return invalid;
   }
 
   resetForm() {
-    console.log("reset form");
     const newState = {...this.state, saved: false};
     this.setState(newState);
   }

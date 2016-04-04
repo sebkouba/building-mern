@@ -25,7 +25,7 @@ class UserDelete extends React.Component {
     $.ajax({
         type: "DELETE",
         url: "",
-        data: user.id
+        data: {userid: user.id}
       });
     this.setState(newState);
   };

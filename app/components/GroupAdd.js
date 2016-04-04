@@ -29,7 +29,11 @@ class GroupAdd extends React.Component {
 
   saveGroup(groupname) {
     console.log("saving group: " + groupname);
-    // todo create AJAX Request
+    $.ajax({
+      type: "POST",
+      url: "",
+      data: {groupname: groupname}
+    });
   }
 
   validateGroup(groupname) {

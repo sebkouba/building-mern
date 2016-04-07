@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 import entryCtrl from './controllers/entry.server.controller.js';
 import recordWeightCtrl from './controllers/recordWeight.server.controller';
+import Bodyweight from './models/recordWeight.server.model';
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
@@ -21,6 +22,14 @@ app.post('/entry', (req, res) => {
 
 app.post('/recordweight', (req, res) => {
   return recordWeightCtrl(req, res);
+});
+
+app.get('/getweight', (req, res) => {
+  // return the data that was retrieved from the db
+  Bodyweight.find({}, (err, weights) => {
+    console.log(weights);
+    res.send(weights);
+  });
 });
 
 // forward requests to the hot server. Seems to fix my F5 bug...

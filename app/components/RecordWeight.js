@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Using ref rather than state to handle the values
+ * */
+
 class RecordWeight extends React.Component {
   handleSubmit(){
     var newWeight = this.weight.value;
@@ -14,9 +18,9 @@ class RecordWeight extends React.Component {
     console.log("saving weight: " + val);
     // post something to /entry
   $.ajax({
-      url: '/entry',
+      url: '/recordweight',
       type: 'POST',
-      data: {title: "from ajax: " + val},
+      data: {weight: val},
       success: function(data) {
         console.log("success");
       }.bind(this),

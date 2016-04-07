@@ -1,8 +1,8 @@
-var Entry = require('../models/entry.server.model.js');
+import Entry from '../models/entry.server.model.js';
 
 // create and save an entry from post request data
 // this function is then used in a route
-exports.create = function(req, res) {
+const create = function(req, res) {
   var entry = new Entry({
     title: req.body.title,
     description: req.body.description
@@ -20,3 +20,5 @@ exports.create = function(req, res) {
     }
   });
 };
+
+export default create;

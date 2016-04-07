@@ -1,9 +1,10 @@
 var express = require('express');
 var app = express();
-var entryCtrl = require('./controllers/entry.server.controller.js');
+import entryCtrl from './controllers/entry.server.controller.js';
+import recordWeightCtrl from './controllers/recordWeight.server.controller';
 
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGOLAB_URI);
@@ -15,12 +16,16 @@ app.get('/hello', (req, res) => {
 
 // send request data to the entryController which saves it in the db
 app.post('/entry', (req, res) => {
-  return entryCtrl.create(req, res);
+  return entryCtrl(req, res);
+});
+
+app.post('/recordweight', (req, res) => {
+  return recordWeightCtrl(req, res);
 });
 
 // forward requests to the hot server. Seems to fix my F5 bug...
 var request = require('request');
-app.use('/*', function(req, res) {
+app.use('/*', function (req, res) {
   var url = "http://localhost:3001" + req.url;
   req.pipe(request(url)).pipe(res);
 });
@@ -42,9 +47,9 @@ new WebpackDevServer(webpack(config), {
     "*": "http://localhost:3000"
   }
 }).listen(3001, 'localhost', function (err, result) {
-   if (err) {
-     console.log(err);
-   }
+  if (err) {
+    console.log(err);
+  }
 
-   console.log('Dev Server Listening at localhost:3001');
+  console.log('Dev Server Listening at localhost:3001');
 });

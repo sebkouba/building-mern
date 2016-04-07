@@ -3,7 +3,9 @@
   "watch": [
     "server.js",
     "webpack.config.js",
-    "package.json"
+    "package.json",
+    "./controllers",
+    "./models"
   ],
-  "exec": "node server.js"
+  "exec": "babel-node --presets es2015 server.js"
 }

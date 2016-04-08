@@ -27,7 +27,7 @@ app.post('/recordweight', (req, res) => {
 app.get('/getweight', (req, res) => {
   // return the data that was retrieved from the db
   Bodyweight.find({}, (err, weights) => {
-    console.log(weights);
+    //console.log(weights);
     res.send(weights);
   });
 });

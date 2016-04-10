@@ -23,6 +23,8 @@ module.exports = {
     path: __dirname + '/dist',
     filename: "bundle.js"
   },
+  // we had no source maps!!!
+  devtool: "source-map",
   module: {
     loaders: [
       {

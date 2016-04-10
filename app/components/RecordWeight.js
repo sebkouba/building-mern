@@ -24,7 +24,7 @@ class RecordWeight extends React.Component {
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: []
           }
         ]
       }
@@ -91,16 +91,17 @@ class RecordWeight extends React.Component {
   render() {
     return (
       <div className="container-fluid">
-
-        <div className="input-group col-md-6">
-          <input type="text" className="form-control" placeholder="Enter weight"
-                 ref={(ref) => this.setRef(ref)}/>
-        <span className='input-group-btn'>
-          <button className="btn btn-default" type="button"
-                  onClick={() => this.handleSubmit()}>Submit
-          </button>
-        </span>
-        </div>
+        <form>
+          <div className="input-group col-md-6">
+            <input type="text" className="form-control" placeholder="Enter weight"
+                   ref={(ref) => this.setRef(ref)}/>
+          <span className='input-group-btn'>
+            <button className="btn btn-default" type="submit"
+                    onClick={() => this.handleSubmit()}>Submit
+            </button>
+          </span>
+          </div>
+        </form>
         <LineChart data={this.state.data} width="600" height="250"/>
         <BodyweightList weights={this.state.weights} />
       </div>

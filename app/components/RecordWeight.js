@@ -33,21 +33,15 @@ class RecordWeight extends React.Component {
 
   componentWillMount() {
     this.getWeight();
-    console.log("will mount -> getWeight");
   }
 
   getWeight() {
-    console.log("getting weight");
     const myArray = [];
     $.get("/getweight", (data) => {
 
-      console.log("getweight data: " + data);
       data.map((val) => {
         myArray.push(val.weight);
       });
-      console.log("data in getweight: " + data);
-      console.log("myArray in getweight: " + myArray);
-
       const newVal = {...this.state.data};
       newVal.datasets[0].data = myArray;
       this.setState({data: newVal});
@@ -66,20 +60,12 @@ class RecordWeight extends React.Component {
   }
 
   saveWeight(val) {
-    console.log("saving weight: " + val);
-    // post something to /entry
     $.ajax({
       url: '/recordweight',
       type: 'POST',
       data: {weight: val},
       success: function (data) {
         console.log("success");
-        // optimistic rendering without error checking. Sketchy... but in "success"...
-        //this.setState({weights:this.state.weights.concat({weight: val})});
-        // now this isn't a pure function?!?...
-        //$.get("/getweight", (data) => {
-        //  this.setState({weights: data});
-        //});
         this.getWeight();
       }.bind(this),
       error: function (xhr, status, err) {

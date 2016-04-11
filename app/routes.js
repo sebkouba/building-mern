@@ -10,7 +10,7 @@ import SavePics from './components/SavePics'
 export default (
   <Route path="/" component={App}>
     <Route path="/recordpb" component={RecordPB} />
-    <Route path="/recordweight" component={RecordWeight} />
+    <Route path="/bodyweight" component={RecordWeight} />
     <Route path="/recordmeasurements" component={RecordMeasurements} />
     <Route path="/savepics" component={SavePics} />
     <IndexRoute component={Home} />

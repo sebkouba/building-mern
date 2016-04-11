@@ -20,11 +20,11 @@ app.post('/entry', (req, res) => {
   return entryCtrl(req, res);
 });
 
-app.post('/recordweight', (req, res) => {
+app.post('/weight', (req, res) => {
   return recordWeightCtrl(req, res);
 });
 
-app.get('/getweight', (req, res) => {
+app.get('/weight', (req, res) => {
   // return the data that was retrieved from the db
   Bodyweight.find({}, (err, weights) => {
     //console.log(weights);

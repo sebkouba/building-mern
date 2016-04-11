@@ -4,7 +4,7 @@ class BodyweightList extends React.Component {
 
   render() {
     const points = this.props.weights.map((weight) => {
-      return <div key={weight._id}>{weight.weight}</div>
+      return <div key={weight._id}>{weight.createdOn.substring(0, 10)}: {weight.weight}</div>
     });
     return (
       <div>

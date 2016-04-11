@@ -7,14 +7,22 @@ import { Line as LineChart } from "react-chartjs";
  * Using ref rather than state to handle the values
  * */
 
+var linchartStyle = {
+  border: "3px solid green",
+  padding: "10px",
+  margin: "10px 0 10px 0"
+};
+
 class RecordWeight extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      // entire mongo records
       weights: [],
-      weightsArray: [],
+
+      // data for graph
       data : {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: [],
         datasets: [
           {
             label: "My First dataset",
@@ -35,17 +43,19 @@ class RecordWeight extends React.Component {
     this.getWeight();
   }
 
+  // update weight data state from server
   getWeight() {
-    const myArray = [];
-    $.get("/getweight", (data) => {
-
+    const weightsArr = [];
+    const labelArr = [];
+    $.get("/weight", (data) => {
       data.map((val) => {
-        myArray.push(val.weight);
+        weightsArr.push(val.weight);
+        labelArr.push(val.createdOn.substring(0, 10));
       });
-      const newVal = {...this.state.data};
-      newVal.datasets[0].data = myArray;
-      this.setState({data: newVal});
-      this.setState({weights: data, data: newVal});
+      const newData = {...this.state.data};
+      newData.datasets[0].data = weightsArr;
+      newData.labels = labelArr;
+      this.setState({weights: data, data: newData});
     });
   }
 
@@ -61,11 +71,11 @@ class RecordWeight extends React.Component {
 
   saveWeight(val) {
     $.ajax({
-      url: '/recordweight',
+      url: '/weight',
       type: 'POST',
       data: {weight: val},
       success: function (data) {
-        console.log("success");
+        console.log("saved data - updating state");
         this.getWeight();
       }.bind(this),
       error: function (xhr, status, err) {
@@ -77,6 +87,8 @@ class RecordWeight extends React.Component {
   render() {
     return (
       <div className="container-fluid">
+        <h1>Record Bodyweight</h1>
+        <p>Please enter your bodyweight and corresponding date.</p>
         <form>
           <div className="input-group col-md-6">
             <input type="text" className="form-control" placeholder="Enter weight"
@@ -88,7 +100,9 @@ class RecordWeight extends React.Component {
           </span>
           </div>
         </form>
-        <LineChart data={this.state.data} width="600" height="250"/>
+        <div style={linchartStyle}>
+          <LineChart data={this.state.data} width="600" height="250"/>
+        </div>
         <BodyweightList weights={this.state.weights} />
       </div>
     )

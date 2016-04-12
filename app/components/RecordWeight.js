@@ -1,7 +1,9 @@
 import React from 'react';
 import BodyweightList from './bodyweight/BodyweightList';
 import BodyGraph from './bodyweight/BodyweightChartjs';
+import BodyweightForm from './bodyweight/BodyweightForm';
 import { Line as LineChart } from "react-chartjs";
+import moment from 'moment';
 
 /**
  * Using ref rather than state to handle the values
@@ -16,7 +18,15 @@ var linchartStyle = {
 class RecordWeight extends React.Component {
   constructor(props){
     super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleWeightChange = this.handleWeightChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+
     this.state = {
+      formWeight: "",
+      formDate: moment(),
+
       // entire mongo records
       weights: [],
 
@@ -50,7 +60,7 @@ class RecordWeight extends React.Component {
     $.get("/weight", (data) => {
       data.map((val) => {
         weightsArr.push(val.weight);
-        labelArr.push(val.createdOn.substring(0, 10));
+        labelArr.push(moment(val.date).format("DD.MM.YYYY"));
       });
       const newData = {...this.state.data};
       newData.datasets[0].data = weightsArr;
@@ -60,20 +70,25 @@ class RecordWeight extends React.Component {
   }
 
   handleSubmit() {
-    var newWeight = this.weight.value;
-    this.weight.value = '';
+    console.log("submitting");
+    var newWeight = this.state.formWeight;
+    this.setState({formWeight: ""});
     this.saveWeight(newWeight);
   }
 
-  setRef(ref) {
-    this.weight = ref;
+  handleWeightChange(e) {
+    this.setState({formWeight: e.target.value})
+  }
+
+  handleDateChange(date) {
+    this.setState({formDate: date})
   }
 
   saveWeight(val) {
     $.ajax({
       url: '/weight',
       type: 'POST',
-      data: {weight: val},
+      data: {weight: val, date: this.state.formDate.valueOf()},
       success: function (data) {
         console.log("saved data - updating state");
         this.getWeight();
@@ -89,19 +104,16 @@ class RecordWeight extends React.Component {
       <div className="container-fluid">
         <h1>Record Bodyweight</h1>
         <p>Please enter your bodyweight and corresponding date.</p>
-        <form>
-          <div className="input-group col-md-6">
-            <input type="text" className="form-control" placeholder="Enter weight"
-                   ref={(ref) => this.setRef(ref)}/>
-          <span className='input-group-btn'>
-            <button className="btn btn-default" type="submit"
-                    onClick={() => this.handleSubmit()}>Submit
-            </button>
-          </span>
-          </div>
-        </form>
+        <p>Should at some point switch to 2.0 of Chartjs or use something with
+        proper x axis spacing given the dates...</p>
+
+        <BodyweightForm handleWeightChange={this.handleWeightChange}
+        handleSubmit={this.handleSubmit}
+        handleDateChange={this.handleDateChange}
+        formDate={this.state.formDate}/>
+
         <div style={linchartStyle}>
-          <LineChart data={this.state.data} width="600" height="250"/>
+          <LineChart data={this.state.data} redrawx width="600" height="250"/>
         </div>
         <BodyweightList weights={this.state.weights} />
       </div>

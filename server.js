@@ -26,7 +26,7 @@ app.post('/weight', (req, res) => {
 
 app.get('/weight', (req, res) => {
   // return the data that was retrieved from the db
-  Bodyweight.find({}, (err, weights) => {
+  Bodyweight.find({}, null, {sort: 'date'}, (err, weights) => {
     //console.log(weights);
     res.send(weights);
   });

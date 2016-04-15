@@ -1,6 +1,6 @@
 import React from 'react';
-import Footer from './Footer'
 import Navbar from './Navbar'
+
 
 let divStyle = {
   border: "2px solid black",
@@ -18,9 +18,6 @@ class App extends React.Component {
         <div className="container">
           {this.props.children}
         </div>
-
-        <Footer />
-
       </div>
     )
   }

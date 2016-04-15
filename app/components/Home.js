@@ -1,9 +1,17 @@
 import React from 'react';
+import AddTodo from '../containers/AddTodo'
+import Footer from './Footer'
+import VisibleTodoList from '../containers/VisibleTodoList'
 
 class Home extends React.Component {
   render() {
     return (
-      <h1>This is my Home!</h1>
+      <div>
+        <h1>This is my Home!</h1>
+        <AddTodo />
+        <VisibleTodoList />
+        <Footer />
+      </div>
     )
   }
 }

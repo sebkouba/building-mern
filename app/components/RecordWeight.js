@@ -20,7 +20,7 @@ class RecordWeight extends React.Component {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleWeightChange = this.handleWeightChange.bind(this);
+    //this.handleWeightChange = this.handleWeightChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
 
     this.state = {
@@ -76,9 +76,10 @@ class RecordWeight extends React.Component {
     this.saveWeight(newWeight);
   }
 
-  handleWeightChange(e) {
+  // this also works and means we have to bind neither in the constructor nor render
+  handleWeightChange = (e) => {
     this.setState({formWeight: e.target.value})
-  }
+  };
 
   handleDateChange(date) {
     this.setState({formDate: date})
